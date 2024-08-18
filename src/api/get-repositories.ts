@@ -1,8 +1,6 @@
 import axios from "axios";
 import { RepositoryType } from "../types";
 
-const token = "";
-
 export const getRepositories = async (
   language: string
 ): Promise<RepositoryType[]> => {
@@ -13,7 +11,7 @@ export const getRepositories = async (
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer `,
         },
       }
     );
