@@ -11,7 +11,7 @@ export const getRepositories = async (
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: `Bearer `,
+          Authorization: `Bearer cenas`,
         },
       }
     );
