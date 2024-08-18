@@ -1,7 +1,7 @@
 import axios from "axios";
 import { RepositoryType } from "../types";
 
-const token = "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";
+const token = "";
 
 export const getRepositories = async (
   language: string
