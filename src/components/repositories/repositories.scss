@@ -1,0 +1,49 @@
+// https://codepen.io/grardovr/pen/jObWZQq
+
+.repo-list-container {
+  width: 100%;
+}
+
+.repo-container {
+  width: 100%;
+  height: 12rem;
+  justify-content: center;
+}
+
+.repo-container .repo-item:not(:last-child) {
+  margin-right: 0.6rem;
+}
+
+.repo-container:focus-within .repo-item,
+.repo-container:hover .repo-item {
+  transform: translateX(-10%);
+}
+
+.repo-container .repo-item:focus,
+.repo-container .repo-item:hover {
+  transform: scale(1.2);
+  z-index: 100;
+}
+
+.repo-item {
+  height: 100%;
+  transition: transform 500ms;
+  border-radius: 0.2rem;
+  border: 0.1rem solid lightgray;
+  cursor: pointer;
+}
+
+.repo-item:focus ~ .repo-item,
+.repo-item:hover ~ .repo-item {
+  transform: translateX(10%);
+}
+
+.repo-item:hover ~ .repo-item {
+  transform: translateX(10%);
+}
+
+.repo-item img {
+  width: 15rem;
+  height: 100%;
+  object-fit: cover;
+}

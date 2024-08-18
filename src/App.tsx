@@ -1,12 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import "./App.scss";
+import { LoginScreen } from "./screens/login/login";
+import { DiscoveryScreen } from "./screens/home/discovery";
+/* import dotenv from "dotenv";
+
+dotenv.config(); */
+/*import { initializeApp } from 'firebase/app';
+
+ const firebaseConfig = {
+  "apiKey": 'AIzaSyARU9Xw1LUF40ONBjLGHfKSUMaLeSuvg4E',
+  "authDomain": "https://wonderful-moss-0ac2b9003.5.azurestaticapps.net",
+  "databaseURL": "",
+  "projectId": "github-discovery-project",
+  "storageBucket": "",
+  "messagingSenderId": "",
+  "appId": "",
+  "measurementId": ""
+};
+
+const app = initializeApp(firebaseConfig); */
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginScreen />} />
+        <Route path="/discovery" element={<DiscoveryScreen />} />
+      </Routes>
+    </BrowserRouter>
+  );
+
+  /* return (
     <>
       <div>
         <a href="https://vitejs.dev" target="_blank">
@@ -29,7 +53,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  ) */
 }
 
-export default App
+export default App;

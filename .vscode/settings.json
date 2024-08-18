@@ -1,0 +1,33 @@
+{
+  // Set vscode formatter to Prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Format on save
+  "editor.formatOnSave": true,
+
+  // Point project Typescript version instead vscode's version
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  // https://github.com/Hidepixel/web-dx/issues/126
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  // Force auto-import relative pathing.
+  "typescript.preferences.importModuleSpecifier": "relative",
+
+  "editor.codeActionsOnSave": {
+    // Enable eslint auto-fix
+    "source.fixAll.eslint": "explicit",
+    // Enable markdownlint auto-fix
+    "source.fixAll.markdownlint": "explicit"
+  },
+
+  // Configs for https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-scss
+  "scss.scannerExclude": [
+    ".*/**",
+    "node_modules",
+    "stories",
+    "test",
+    "android",
+    "dist",
+    "build",
+    "src/*/!(/styles)/**/*" // scan only src/scss folder.
+  ]
+}
