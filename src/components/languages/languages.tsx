@@ -1,20 +1,15 @@
 import { Chip, Stack } from "@mui/material";
 import "./languages.scss";
 
-const languagesAndSDKs = [
+export const languages = [
+  "vue",
   "javascript",
   "python",
   "java",
   "php",
   "ruby",
   "typescript",
-  "react",
-  "angular",
-  "vue",
-  "django",
-  "flask",
-  "spring",
-  "laravel",
+  //"react",
 ];
 
 type LanguagesProps = {
@@ -26,7 +21,7 @@ export const Languages = ({ selectedLanguages, onSelect }: LanguagesProps) => {
   console.log(selectedLanguages);
   return (
     <Stack className="languages" direction="row" spacing={2}>
-      {languagesAndSDKs.map((language) => {
+      {languages.map((language) => {
         return (
           <Chip
             key={language}

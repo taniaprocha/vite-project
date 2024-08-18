@@ -1,5 +1,9 @@
 {
   "files": [],
+  "compilerOptions": {
+    "module": "node16",
+    "moduleResolution": "node16"
+  },
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }

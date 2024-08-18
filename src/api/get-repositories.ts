@@ -4,14 +4,16 @@ import { RepositoryType } from "../types";
 export const getRepositories = async (
   language: string
 ): Promise<RepositoryType[]> => {
+  //const token = await getInstallationAccessToken(Number(INSTALLATION_ID));
+  console.log(import.meta.env.VITE_REACT_APP_GITHUB_TOKEN);
   try {
     const repos = await axios.get(
-      `https://api.github.com/search/repositories?q=${encodeURIComponent("language:" + language)}&page=1&per_page=10`,
+      `https://api.github.com/search/repositories?q=${encodeURIComponent("language:" + language)}&page=1&per_page=15`,
       {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: `Bearer cenas`,
+          Authorization: `Bearer ${import.meta.env.VITE_REACT_APP_GITHUB_TOKEN}`,
         },
       }
     );
@@ -21,3 +23,8 @@ export const getRepositories = async (
     return Promise.reject(error);
   }
 };
+
+export interface GitHubAppToken {
+  token: string;
+  expiresAt: Date;
+}

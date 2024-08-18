@@ -1,49 +1,64 @@
-// https://codepen.io/grardovr/pen/jObWZQq
+// Inspired at https://codepen.io/grardovr/pen/jObWZQq
 
 .repo-list-container {
   width: 100%;
-}
+  padding-left: 2rem;
+  padding-right: 2rem;
 
-.repo-container {
-  width: 100%;
-  height: 12rem;
-  justify-content: center;
-}
+  .repo-container {
+    width: 100%;
+    height: 12rem;
+    justify-content: center;
 
-.repo-container .repo-item:not(:last-child) {
-  margin-right: 0.6rem;
-}
+    .repo-item:not(:last-child) {
+      margin-right: 0.6rem;
+    }
 
-.repo-container:focus-within .repo-item,
-.repo-container:hover .repo-item {
-  transform: translateX(-10%);
-}
+    .repo-item {
+      height: 100%;
+      border-radius: 0.2rem;
+      transition: transform 500ms;
+      border: 0.1rem solid lightgray;
+      cursor: pointer;
+      position: relative;
 
-.repo-container .repo-item:focus,
-.repo-container .repo-item:hover {
-  transform: scale(1.2);
-  z-index: 100;
-}
+      .name {
+        transition: opacity 300ms;
+        opacity: 0;
+        position: absolute;
+        bottom: 0.3rem;
+        left: 0.3rem;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 0.1rem 0.4rem;
+      }
 
-.repo-item {
-  height: 100%;
-  transition: transform 500ms;
-  border-radius: 0.2rem;
-  border: 0.1rem solid lightgray;
-  cursor: pointer;
-}
+      img {
+        width: 15rem;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
 
-.repo-item:focus ~ .repo-item,
-.repo-item:hover ~ .repo-item {
-  transform: translateX(10%);
-}
+    .repo-item:focus ~ .repo-item,
+    .repo-item:hover ~ .repo-item {
+      transform: translateX(10%);
+    }
+  }
 
-.repo-item:hover ~ .repo-item {
-  transform: translateX(10%);
-}
+  .repo-container:focus-within .repo-item,
+  .repo-container:hover .repo-item {
+    transform: translateX(-10%);
+  }
 
-.repo-item img {
-  width: 15rem;
-  height: 100%;
-  object-fit: cover;
+  .repo-container .repo-item:focus,
+  .repo-container .repo-item:hover {
+    transform: scale(1.2);
+    z-index: 100;
+
+    .name {
+      transition: opacity 500ms linear 300ms;
+      opacity: 1;
+    }
+  }
 }

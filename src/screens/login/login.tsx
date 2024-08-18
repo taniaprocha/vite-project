@@ -1,5 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import "./login.scss";

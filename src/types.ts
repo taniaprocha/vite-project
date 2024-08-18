@@ -6,6 +6,7 @@ export type RepositoryType = {
   language: string;
   stargazers_count: number;
   watchers_count: number;
+  html_url: string;
   owner: {
     avatar_url: string;
   };
