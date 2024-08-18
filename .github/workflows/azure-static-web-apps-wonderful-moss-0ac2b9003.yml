@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     env:
-      VITE_REACT_APP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      VITE_REACT_APP_GITHUB_TOKEN: ${{ secrets.VITE_REACT_APP_GITHUB_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
