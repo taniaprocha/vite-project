@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const { user, onLogout } = useContextApp();
+  const { onLogout } = useContextApp();
 
   return (
     <AppBar position="fixed">
