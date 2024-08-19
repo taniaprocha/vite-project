@@ -14,7 +14,7 @@ export const Bookmarks = ({ bookmarks, onRemoveBookmark }: BookmarksProps) => {
   const listRef = useRef<HTMLDivElement>();
 
   const handleSlideLeft = () => {
-    if (listRef.current && listRef.current.scrollLeft >= 0) {
+    if (listRef.current) {
       listRef.current.scrollLeft -= listRef.current?.clientWidth;
     }
   };
@@ -46,7 +46,7 @@ export const Bookmarks = ({ bookmarks, onRemoveBookmark }: BookmarksProps) => {
                 className="bookmark"
                 onClick={() => onRemoveBookmark(bookmark.id)}
               >
-                <GoStarFill size="3em" color="black" />
+                <GoStarFill size="2em" color="yellow" />
               </Button>
             </Box>
           );

@@ -1,4 +1,10 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Stack,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import { RepositoriesData } from "../../types";
 import { useRef } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -11,6 +17,7 @@ type RepositoriesProps = {
   repositoriesData: RepositoriesData;
   bookmarks: number[];
   onBookmark: (id: number) => void;
+  loadMore: (language: string) => void;
 };
 
 export const Repositories = ({
@@ -18,26 +25,38 @@ export const Repositories = ({
   repositoriesData,
   bookmarks,
   onBookmark,
+  loadMore,
 }: RepositoriesProps) => {
   const listRef = useRef<HTMLDivElement>();
 
   const handleSlideLeft = () => {
-    if (listRef.current && listRef.current.scrollLeft >= 0) {
+    if (listRef.current) {
       listRef.current.scrollLeft -= listRef.current?.clientWidth;
     }
   };
   const handleSlideRight = () => {
     if (listRef.current) {
       listRef.current.scrollLeft += listRef.current?.clientWidth;
+      if (listRef.current?.scrollLeft >= listRef.current?.clientWidth) {
+        loadMore(language);
+      }
     }
   };
+
+  if (!repositoriesData[language]) {
+    return (
+      <Stack alignItems="center" className="loading-repositories">
+        <CircularProgress color="inherit" />
+      </Stack>
+    );
+  }
 
   return (
     <Box className="scroll-element">
       <Box ref={listRef} className="repo-list">
         <Box className="repo-list-container">
           <Stack direction="row" key={language} className="repo-container">
-            {repositoriesData[language]?.map((repo) => {
+            {repositoriesData[language]?.list.map((repo) => {
               return (
                 <a
                   key={repo.id}
@@ -53,6 +72,11 @@ export const Repositories = ({
                   <Box className="name">
                     <Typography variant="caption">{repo.name}</Typography>
                   </Box>
+                  <Box className="details">
+                    <Typography variant="caption">
+                      {`Stars ${repo.stargazers_count}`}
+                    </Typography>
+                  </Box>
                   <Button
                     className="bookmark"
                     onClick={(event) => {
@@ -61,9 +85,9 @@ export const Repositories = ({
                     }}
                   >
                     {bookmarks.includes(repo.id) ? (
-                      <GoStarFill size="3em" color="black" />
+                      <GoStarFill size="2em" color="yellow" />
                     ) : (
-                      <MdOutlineStarOutline size="3em" color="black" />
+                      <MdOutlineStarOutline size="2em" fill="yellow" />
                     )}
                   </Button>
                 </a>

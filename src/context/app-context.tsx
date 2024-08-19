@@ -5,7 +5,7 @@ import {
   useState,
   useEffect,
 } from "react";
-import { BookmarkType, RepositoriesData } from "../types";
+import { BookmarkType, RepositoriesData, SortType } from "../types";
 import { languages } from "../components/languages/languages";
 import { getRepositories } from "../api/get-repositories";
 
@@ -16,6 +16,8 @@ type Context = {
   bookmarks: BookmarkType[];
   onSelectLanguage: (language: string) => void;
   onSelectBookmark: (id: number) => void;
+  loadMoreRepositories: (language: string) => void;
+  sortRepositories: (language: string, type: SortType) => void;
 };
 
 const initialValue: Context = {
@@ -25,6 +27,8 @@ const initialValue: Context = {
   selectedLanguages: [languages[0]],
   onSelectLanguage: () => {},
   onSelectBookmark: () => {},
+  loadMoreRepositories: () => {},
+  sortRepositories: () => {},
 };
 
 export const AppContext = createContext<Context>(initialValue);
@@ -41,10 +45,10 @@ export function AppContextProvider({ children }: { children?: ReactNode }) {
 
   useEffect(() => {
     const getInitialRepo = async () => {
-      const repos = await getRepositories("vue");
+      const repos = await getRepositories("vue", 1);
       if (repos) {
         setRepositoriesData({
-          ["vue"]: repos,
+          ["vue"]: { list: repos.list, page: 1, total: repos.total },
         });
       }
     };
@@ -57,9 +61,12 @@ export function AppContextProvider({ children }: { children?: ReactNode }) {
     } else {
       setSelectedLanguages([...selectedLanguages, language]);
       if (!repositoriesData[language]) {
-        const repos = await getRepositories(language);
+        const repos = await getRepositories(language, 1);
         if (repos) {
-          setRepositoriesData({ ...repositoriesData, [language]: repos });
+          setRepositoriesData({
+            ...repositoriesData,
+            [language]: { list: repos.list, page: 1, total: repos.total },
+          });
         }
       }
     }
@@ -72,7 +79,7 @@ export function AppContextProvider({ children }: { children?: ReactNode }) {
     } else {
       setBookmarksIds([...bookmarksIds, id]);
       Object.keys(repositoriesData).forEach((language) => {
-        const repo = repositoriesData[language].find((r) => r.id === id);
+        const repo = repositoriesData[language]?.list.find((r) => r.id === id);
         if (repo) {
           setBookmarks([
             ...bookmarks,
@@ -83,6 +90,41 @@ export function AppContextProvider({ children }: { children?: ReactNode }) {
     }
   };
 
+  const handleLoadMoreRepositories = async (language: string) => {
+    if (!repositoriesData[language]) {
+      return;
+    }
+    const newPage = repositoriesData[language].page + 1;
+    if (
+      repositoriesData[language].list.length >= repositoriesData[language].total
+    ) {
+      console.log("No more repositories to load");
+      return;
+    }
+    const repos = await getRepositories(language, newPage);
+    if (repos) {
+      setRepositoriesData({
+        ...repositoriesData,
+        [language]: { list: repos.list, page: newPage, total: repos.total },
+      });
+    }
+  };
+
+  const handleSortRepositories = async (language: string, type: SortType) => {
+    setRepositoriesData({
+      ...repositoriesData,
+      [language]: undefined,
+    });
+    const repos = await getRepositories(language, 1, type);
+    if (repos) {
+      setRepositoriesData({
+        ...repositoriesData,
+        [language]: { list: repos.list, page: 1, total: repos.total },
+      });
+    }
+  };
+  console.log(repositoriesData);
+
   return (
     <AppContext.Provider
       value={{
@@ -92,6 +134,8 @@ export function AppContextProvider({ children }: { children?: ReactNode }) {
         bookmarks,
         onSelectLanguage: handleSelectLanguage,
         onSelectBookmark: handleSelectBookmark,
+        loadMoreRepositories: handleLoadMoreRepositories,
+        sortRepositories: handleSortRepositories,
       }}
     >
       {children}

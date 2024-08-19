@@ -1,5 +1,6 @@
 .bookmarks-container {
   position: relative;
+  height: 12rem;
 
   .list {
     display: flex;
@@ -66,6 +67,8 @@
       right: 0.3rem;
       background: none;
       z-index: 3;
+      min-width: auto;
+      padding: 0;
     }
   }
 }

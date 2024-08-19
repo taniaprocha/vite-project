@@ -9,7 +9,9 @@ export const languages = [
   "php",
   "ruby",
   "typescript",
-  //"react",
+  "kotlin",
+  "c#",
+  "go",
 ];
 
 type LanguagesProps = {
@@ -18,7 +20,6 @@ type LanguagesProps = {
 };
 
 export const Languages = ({ selectedLanguages, onSelect }: LanguagesProps) => {
-  console.log(selectedLanguages);
   return (
     <Stack className="languages" direction="row" spacing={2}>
       {languages.map((language) => {

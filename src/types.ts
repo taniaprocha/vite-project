@@ -6,14 +6,19 @@ export type RepositoryType = {
   language: string;
   stargazers_count: number;
   watchers_count: number;
+  forks_count: number;
+  open_issues_count: number;
   html_url: string;
+  updated_at: string;
   owner: {
     avatar_url: string;
   };
 };
 
 export type RepositoriesData = {
-  [language: string]: RepositoryType[];
+  [language: string]:
+    | { list: RepositoryType[]; page: number; total: number }
+    | undefined;
 };
 
 export type BookmarkType = {
@@ -21,3 +26,5 @@ export type BookmarkType = {
   image: string;
   name: string;
 };
+
+export type SortType = "stars" | "forks" | "help-wanted-issues" | "updated";
