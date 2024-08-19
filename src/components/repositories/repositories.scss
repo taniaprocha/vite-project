@@ -1,14 +1,57 @@
 // Inspired at https://codepen.io/grardovr/pen/jObWZQq
 
+.scroll-element {
+  position: relative;
+
+  .repo-list-arrow-left,
+  .repo-list-arrow-right {
+    top: 3rem;
+    position: absolute;
+    height: 12.1rem;
+    min-width: 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .repo-list-arrow-right:hover,
+  .repo-list-arrow-left:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .repo-list-arrow-left {
+    left: 0;
+    border-top-left-radius: 0.2rem;
+    border-bottom-left-radius: 0.2rem;
+  }
+
+  .repo-list-arrow-right {
+    right: 0;
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+  }
+}
+
+.repo-list {
+  height: 18rem;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  overflow-x: hidden;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+}
+
 .repo-list-container {
   width: 100%;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
 
   .repo-container {
     width: 100%;
     height: 12rem;
-    justify-content: center;
 
     .repo-item:not(:last-child) {
       margin-right: 0.6rem;
@@ -31,12 +74,21 @@
         color: white;
         background-color: rgba(0, 0, 0, 0.5);
         padding: 0.1rem 0.4rem;
+        text-transform: capitalize;
       }
 
       img {
         width: 15rem;
         height: 100%;
         object-fit: cover;
+      }
+
+      .bookmark {
+        position: absolute;
+        top: 0.3rem;
+        right: 0.3rem;
+        background: none;
+        z-index: 3;
       }
     }
 

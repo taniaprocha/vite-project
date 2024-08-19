@@ -6,7 +6,7 @@ export const getRepositories = async (
 ): Promise<RepositoryType[]> => {
   try {
     const repos = await axios.get(
-      `https://api.github.com/search/repositories?q=${encodeURIComponent("language:" + language)}&page=1&per_page=15`,
+      `https://api.github.com/search/repositories?q=${encodeURIComponent("language:" + language)}&page=1&per_page=30`,
       {
         headers: {
           Accept: "application/json",

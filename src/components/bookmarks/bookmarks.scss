@@ -1,0 +1,71 @@
+.bookmarks-container {
+  position: relative;
+
+  .list {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.4rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .bookmarks-arrow-left,
+  .bookmarks-arrow-right {
+    top: 0;
+    position: absolute;
+    height: 10rem;
+    min-width: 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .bookmarks-arrow-right:hover,
+  .bookmarks-arrow-left:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .bookmarks-arrow-left {
+    left: 0;
+    border-top-left-radius: 0.2rem;
+    border-bottom-left-radius: 0.2rem;
+  }
+
+  .bookmarks-arrow-right {
+    right: 0;
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+  }
+
+  .bookmark {
+    position: relative;
+    border-radius: 0.2rem;
+
+    img {
+      width: 15rem;
+      max-height: 10rem;
+      object-fit: cover;
+    }
+
+    .name {
+      position: absolute;
+      bottom: 0.3rem;
+      left: 0.3rem;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 0.1rem 0.4rem;
+      text-transform: capitalize;
+    }
+
+    .bookmark {
+      position: absolute;
+      top: 0.3rem;
+      right: 0.3rem;
+      background: none;
+      z-index: 3;
+    }
+  }
+}

@@ -15,3 +15,9 @@ export type RepositoryType = {
 export type RepositoriesData = {
   [language: string]: RepositoryType[];
 };
+
+export type BookmarkType = {
+  id: number;
+  image: string;
+  name: string;
+};
