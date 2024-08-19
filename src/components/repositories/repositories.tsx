@@ -49,6 +49,12 @@ export const Repositories = ({
         <CircularProgress color="inherit" />
       </Stack>
     );
+  } else if (repositoriesData[language].list.length === 0) {
+    return (
+      <Stack alignItems="center" className="loading-repositories">
+        <Typography variant="body1">No repositories found</Typography>
+      </Stack>
+    );
   }
 
   return (
