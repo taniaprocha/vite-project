@@ -48,7 +48,12 @@ export const DiscoveryScreen = () => {
         <Stack>
           {selectedLanguages.map((language) => {
             return (
-              <Stack direction="column" spacing={5} className="top-repo">
+              <Stack
+                key={language}
+                direction="column"
+                spacing={5}
+                className="top-repo"
+              >
                 <Stack direction="row" spacing={1} alignItems="center">
                   <Typography variant="h5">{`Top ${language}`}</Typography>
                   <Button
@@ -66,11 +71,13 @@ export const DiscoveryScreen = () => {
                   >
                     <MenuItem
                       onClick={() => sortRepositories(language, "stars")}
+                      key="stars"
                     >
                       Sort by stars
                     </MenuItem>
                     <MenuItem
                       onClick={() => sortRepositories(language, "forks")}
+                      key="forks"
                     >
                       Sort by forks
                     </MenuItem>
@@ -78,11 +85,13 @@ export const DiscoveryScreen = () => {
                       onClick={() =>
                         sortRepositories(language, "help-wanted-issues")
                       }
+                      key="help-wanted-issues"
                     >
                       Sort by help wanted issues
                     </MenuItem>
                     <MenuItem
                       onClick={() => sortRepositories(language, "updated")}
+                      key="updated"
                     >
                       Sort by updated
                     </MenuItem>

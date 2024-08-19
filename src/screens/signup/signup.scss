@@ -1,0 +1,12 @@
+@import "../../App.scss";
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  min-width: 20rem;
+
+  @include display-sm {
+    min-width: 80vw;
+  }
+}
