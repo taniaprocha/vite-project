@@ -32,8 +32,6 @@ export const AuthContext = createContext<AuthContextType>({
 export function AuthContextProvider({ children }: { children?: ReactNode }) {
   const [user, setUser] = useState<User | undefined>(undefined);
 
-  console.log(user);
-
   const handleLogin = (user: User) => {
     if (user) {
       setUser(undefined);
