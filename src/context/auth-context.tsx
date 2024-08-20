@@ -1,12 +1,6 @@
 import { User } from "firebase/auth";
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import firebase from "firebase/app";
+import { createContext, ReactNode, useContext, useState } from "react";
+import * as firebase from "firebase/app";
 
 type AuthContextType = {
   user?: User;
@@ -47,15 +41,13 @@ export function AuthContextProvider({ children }: { children?: ReactNode }) {
     setUser(user);
   };
 
-  const handleLogout = () => {
-    setUser(undefined);
-  };
-
-  useEffect(() => {}, []);
-
   return (
     <AuthContext.Provider
-      value={{ user, onLogin: handleLogin, onLogout: handleLogout }}
+      value={{
+        user,
+        onLogin: handleLogin,
+        onLogout: () => setUser(undefined),
+      }}
     >
       {children}
     </AuthContext.Provider>

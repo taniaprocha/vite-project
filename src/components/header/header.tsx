@@ -6,13 +6,13 @@ import {
   SvgIcon,
   Toolbar,
 } from "@mui/material";
-import { useContextApp } from "../../context/app-context";
 import "./header.scss";
 import { useNavigate } from "react-router-dom";
+import { useContextAuth } from "../../context/auth-context";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const { onLogout } = useContextApp();
+  const { onLogout, user } = useContextAuth();
 
   return (
     <AppBar position="fixed">
@@ -31,16 +31,30 @@ export const Header = () => {
             </svg>
           </SvgIcon>
           <Box>
-            <Button
-              color="inherit"
-              variant="text"
-              onClick={() => {
-                onLogout();
-                navigate("/signin");
-              }}
-            >
-              Logout
-            </Button>
+            {user && (
+              <Button
+                color="inherit"
+                variant="text"
+                className="username"
+                onClick={() => navigate("/profile")}
+              >
+                {user.displayName ||
+                  user.email?.slice(0, user.email.indexOf("@"))}
+              </Button>
+            )}
+            {user && (
+              <Button
+                color="inherit"
+                variant="text"
+                className="logout"
+                onClick={() => {
+                  onLogout();
+                  navigate("/signin");
+                }}
+              >
+                Logout
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>

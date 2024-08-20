@@ -33,7 +33,7 @@ export const SignUpScreen = () => {
   };
 
   return (
-    <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="user-form" onSubmit={handleSubmit(onSubmit)}>
       <Box>
         <TextField
           type="email"
@@ -88,7 +88,6 @@ export const SignUpScreen = () => {
           </Typography>
         )}
       </Box>
-
       <Button
         variant="contained"
         type="submit"

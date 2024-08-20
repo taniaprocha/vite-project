@@ -2,8 +2,7 @@ import { Box, Button, Link, Stack, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-import "./signin.scss";
+import "../signup/signup.scss";
 import { useContextAuth } from "../../context/auth-context";
 
 type FormValues = {
@@ -38,7 +37,7 @@ export const SignInScreen = () => {
   };
 
   return (
-    <form className="signin-form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="user-form" onSubmit={handleSubmit(onSubmit)}>
       <Box>
         <TextField
           variant="outlined"

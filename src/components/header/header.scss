@@ -1,4 +1,9 @@
 .header {
   display: flex;
   justify-content: space-between;
+
+  .logout,
+  .username {
+    text-transform: capitalize;
+  }
 }
