@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 import "./signin.scss";
-import { useContextApp } from "../../context/app-context";
+import { useContextAuth } from "../../context/auth-context";
 
 type FormValues = {
   email: string;
@@ -13,14 +13,13 @@ type FormValues = {
 
 export const SignInScreen = () => {
   const navigate = useNavigate();
-  const { onLogin } = useContextApp();
+  const { onLogin } = useContextAuth();
   const { register, formState, handleSubmit, trigger } = useForm<FormValues>({
     defaultValues: {
       email: "",
       password: "",
     },
   });
-  const { errors } = formState;
 
   const onSubmit = async (formData: FormValues) => {
     const auth = getAuth();
@@ -45,7 +44,7 @@ export const SignInScreen = () => {
           variant="outlined"
           type="email"
           fullWidth
-          error={Boolean(errors.email)}
+          error={Boolean(formState.errors.email)}
           {...register("email", {
             required: {
               value: true,
@@ -62,8 +61,10 @@ export const SignInScreen = () => {
           required
           onKeyUp={() => trigger("email")}
         />
-        {errors.email && (
-          <Typography variant="caption">{errors.email.message}</Typography>
+        {formState.errors.email && (
+          <Typography variant="caption">
+            {formState.errors.email.message}
+          </Typography>
         )}
       </Box>
       <Box>
@@ -71,7 +72,7 @@ export const SignInScreen = () => {
           variant="outlined"
           type="password"
           fullWidth
-          error={Boolean(errors.password)}
+          error={Boolean(formState.errors.password)}
           {...register("password", {
             required: {
               value: true,
@@ -87,15 +88,17 @@ export const SignInScreen = () => {
           required
           onKeyUp={() => trigger("password")}
         />
-        {errors.password && (
-          <Typography variant="caption">{errors.password.message}</Typography>
+        {formState.errors.password && (
+          <Typography variant="caption">
+            {formState.errors.password.message}
+          </Typography>
         )}
       </Box>
 
       <Button
         variant="contained"
         type="submit"
-        disabled={errors && Object.keys(errors).length > 0}
+        disabled={formState.errors && Object.keys(formState.errors).length > 0}
       >
         Sign in
       </Button>

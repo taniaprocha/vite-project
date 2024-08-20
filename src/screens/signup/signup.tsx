@@ -2,7 +2,6 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
 import "./signup.scss";
 
 type FormValues = {
@@ -18,7 +17,6 @@ export const SignUpScreen = () => {
       password: "",
     },
   });
-  const { errors } = formState;
 
   const onSubmit = async (formData: FormValues) => {
     const auth = getAuth();
@@ -40,7 +38,7 @@ export const SignUpScreen = () => {
         <TextField
           type="email"
           fullWidth
-          error={Boolean(errors.email)}
+          error={Boolean(formState.errors.email)}
           {...register("email", {
             required: {
               value: true,
@@ -57,8 +55,10 @@ export const SignUpScreen = () => {
           required
           onKeyUp={() => trigger("email")}
         />
-        {errors.email && (
-          <Typography variant="caption">{errors.email.message}</Typography>
+        {formState.errors.email && (
+          <Typography variant="caption">
+            {formState.errors.email.message}
+          </Typography>
         )}
       </Box>
       <Box>
@@ -66,7 +66,7 @@ export const SignUpScreen = () => {
           variant="outlined"
           type="password"
           fullWidth
-          error={Boolean(errors.password)}
+          error={Boolean(formState.errors.password)}
           {...register("password", {
             required: {
               value: true,
@@ -82,15 +82,17 @@ export const SignUpScreen = () => {
           required
           onKeyUp={() => trigger("password")}
         />
-        {errors.password && (
-          <Typography variant="caption">{errors.password.message}</Typography>
+        {formState.errors.password && (
+          <Typography variant="caption">
+            {formState.errors.password.message}
+          </Typography>
         )}
       </Box>
 
       <Button
         variant="contained"
         type="submit"
-        disabled={errors && Object.keys(errors).length > 0}
+        disabled={formState.errors && Object.keys(formState.errors).length > 0}
       >
         Create account
       </Button>

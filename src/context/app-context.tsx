@@ -8,10 +8,8 @@ import {
 import { BookmarkType, RepositoriesData, SortType } from "../types";
 import { languages } from "../components/languages/languages";
 import { getRepositories } from "../api/get-repositories";
-import { User } from "firebase/auth";
 
 type Context = {
-  user?: User;
   repositoriesData: RepositoriesData;
   selectedLanguages: string[];
   bookmarksIds: number[];
@@ -20,11 +18,9 @@ type Context = {
   onSelectBookmark: (id: number) => void;
   loadMoreRepositories: (language: string) => void;
   sortRepositories: (language: string, type: SortType) => void;
-  onLogin: (user: User) => void;
-  onLogout: () => void;
 };
 
-const initialValue: Context = {
+export const AppContext = createContext<Context>({
   repositoriesData: {},
   bookmarksIds: [],
   bookmarks: [],
@@ -33,26 +29,17 @@ const initialValue: Context = {
   onSelectBookmark: () => {},
   loadMoreRepositories: () => {},
   sortRepositories: () => {},
-  onLogin: () => {},
-  onLogout: () => {},
-};
-
-export const AppContext = createContext<Context>(initialValue);
+});
 
 export function AppContextProvider({ children }: { children?: ReactNode }) {
-  const [repositoriesData, setRepositoriesData] = useState(
-    initialValue.repositoriesData
+  const [repositoriesData, setRepositoriesData] = useState<RepositoriesData>(
+    {}
   );
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>(
-    initialValue.selectedLanguages
-  );
-  const [bookmarksIds, setBookmarksIds] = useState<number[]>(
-    initialValue.bookmarksIds
-  );
-  const [bookmarks, setBookmarks] = useState<BookmarkType[]>(
-    initialValue.bookmarks
-  );
-  const [user, setUser] = useState<User | undefined>(initialValue.user);
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([
+    languages[0],
+  ]);
+  const [bookmarksIds, setBookmarksIds] = useState<number[]>([]);
+  const [bookmarks, setBookmarks] = useState<BookmarkType[]>([]);
 
   useEffect(() => {
     const getInitialRepo = async () => {
@@ -134,23 +121,10 @@ export function AppContextProvider({ children }: { children?: ReactNode }) {
       });
     }
   };
-  console.log(user, repositoriesData);
-
-  const handleLogin = (user: User) => {
-    if (user) {
-      setUser(undefined);
-    }
-    setUser(user);
-  };
-
-  const handleLogout = () => {
-    setUser(undefined);
-  };
 
   return (
     <AppContext.Provider
       value={{
-        user,
         repositoriesData,
         selectedLanguages,
         bookmarksIds,
@@ -159,8 +133,6 @@ export function AppContextProvider({ children }: { children?: ReactNode }) {
         onSelectBookmark: handleSelectBookmark,
         loadMoreRepositories: handleLoadMoreRepositories,
         sortRepositories: handleSortRepositories,
-        onLogin: handleLogin,
-        onLogout: handleLogout,
       }}
     >
       {children}
