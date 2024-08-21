@@ -1,6 +1,6 @@
 # Github Discovery Frontend Challenge
 
-Project created with Vite https://medium.com/@miahossain8888/how-to-create-a-react-app-with-vite-571883b100ef
+Project created with Vite Template - Vite + React + Typescript 
 
 To run in localhost: ```npm run dev```
 
