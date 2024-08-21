@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import "../signup/signup.scss";
 import { useContextAuth } from "../../context/auth-context";
+import { useState } from "react";
 
 type FormValues = {
   email: string;
@@ -13,12 +14,13 @@ type FormValues = {
 export const SignInScreen = () => {
   const navigate = useNavigate();
   const { onLogin } = useContextAuth();
-  const { register, formState, handleSubmit, trigger } = useForm<FormValues>({
+  const { register, formState, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       email: "",
       password: "",
     },
   });
+  const [error, setError] = useState<string>();
 
   const onSubmit = async (formData: FormValues) => {
     const auth = getAuth();
@@ -29,9 +31,11 @@ export const SignInScreen = () => {
         formData.password
       );
       const user = userCredential.user;
+      setError(undefined);
       onLogin(user);
       navigate("/discovery");
     } catch (error) {
+      setError("Invalid email or password");
       console.error("Error while authenticating user", error);
     }
   };
@@ -58,10 +62,10 @@ export const SignInScreen = () => {
           label="email"
           placeholder="email"
           required
-          onKeyUp={() => trigger("email")}
+          onChange={() => setError(undefined)}
         />
         {formState.errors.email && (
-          <Typography variant="caption">
+          <Typography color="error" variant="caption">
             {formState.errors.email.message}
           </Typography>
         )}
@@ -85,20 +89,22 @@ export const SignInScreen = () => {
           label="password"
           placeholder="password"
           required
-          onKeyUp={() => trigger("password")}
+          onChange={() => setError(undefined)}
         />
         {formState.errors.password && (
-          <Typography variant="caption">
+          <Typography color="error" variant="caption">
             {formState.errors.password.message}
           </Typography>
         )}
       </Box>
 
-      <Button
-        variant="contained"
-        type="submit"
-        disabled={formState.errors && Object.keys(formState.errors).length > 0}
-      >
+      {error && (
+        <Typography color="error" variant="caption">
+          {error}
+        </Typography>
+      )}
+
+      <Button variant="contained" type="submit">
         Sign in
       </Button>
       <Stack direction="row" spacing={1} alignItems="center">

@@ -60,19 +60,7 @@ export const Repositories = ({
   return (
     <Box className="scroll-element">
       <Box ref={listRef} className="repo-list">
-        <Box
-          sx={{
-            paddingLeft:
-              listRef.current?.scrollWidth > listRef.current?.clientWidth
-                ? "2rem"
-                : "0",
-            paddingRight:
-              listRef.current?.scrollWidth > listRef.current?.clientWidth
-                ? "2rem"
-                : "0",
-          }}
-          className="repo-list-container"
-        >
+        <Box className="repo-list-container">
           <Stack direction="row" key={language} className="repo-container">
             {repositoriesData[language]?.list.map((repo) => {
               return (
@@ -114,16 +102,12 @@ export const Repositories = ({
           </Stack>
         </Box>
       </Box>
-      {listRef.current?.scrollWidth > listRef.current?.clientWidth && (
-        <Button className="repo-list-arrow-left" onClick={handleSlideLeft}>
-          <IoIosArrowBack size="2rem" color="white" />
-        </Button>
-      )}
-      {listRef.current?.scrollWidth > listRef.current?.clientWidth && (
-        <Button className="repo-list-arrow-right" onClick={handleSlideRight}>
-          <IoIosArrowForward size="2rem" color="white" />
-        </Button>
-      )}
+      <Button className="repo-list-arrow-left" onClick={handleSlideLeft}>
+        <IoIosArrowBack size="2rem" color="white" />
+      </Button>
+      <Button className="repo-list-arrow-right" onClick={handleSlideRight}>
+        <IoIosArrowForward size="2rem" color="white" />
+      </Button>
     </Box>
   );
 };

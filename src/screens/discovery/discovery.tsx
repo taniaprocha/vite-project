@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Header } from "../../components/header/header";
 import "./discovery.scss";
-import { Languages } from "../../components/languages/languages";
+import { Languages } from "../../components/languages";
 import { Repositories } from "../../components/repositories/repositories";
 import { useContextApp } from "../../context/app-context";
 import { Bookmarks } from "../../components/bookmarks/bookmarks";

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useContextAuth } from "../../context/auth-context";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Link, Stack, TextField, Typography } from "@mui/material";
 import { updateEmail, updateProfile, getAuth } from "firebase/auth";
 import "../signup/signup.scss";
 import { useNavigate } from "react-router-dom";
@@ -107,6 +107,11 @@ export const ProfileScreen = () => {
       >
         Save
       </Button>
+      <Stack direction="row" spacing={1} justifyContent="center">
+        <Link variant="body1" color="inherit" href="/discovery">
+          Click here to back to discovery
+        </Link>
+      </Stack>
     </form>
   );
 };

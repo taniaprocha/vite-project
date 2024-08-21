@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Stack, TextField, Typography, Link } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
@@ -11,7 +11,7 @@ type FormValues = {
 
 export const SignUpScreen = () => {
   const navigate = useNavigate();
-  const { register, formState, handleSubmit, trigger } = useForm<FormValues>({
+  const { register, formState, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       email: "",
       password: "",
@@ -53,7 +53,6 @@ export const SignUpScreen = () => {
           label="email"
           placeholder="email"
           required
-          onKeyUp={() => trigger("email")}
         />
         {formState.errors.email && (
           <Typography variant="caption">
@@ -80,7 +79,6 @@ export const SignUpScreen = () => {
           label="password"
           placeholder="password"
           required
-          onKeyUp={() => trigger("password")}
         />
         {formState.errors.password && (
           <Typography variant="caption">
@@ -88,13 +86,14 @@ export const SignUpScreen = () => {
           </Typography>
         )}
       </Box>
-      <Button
-        variant="contained"
-        type="submit"
-        disabled={formState.errors && Object.keys(formState.errors).length > 0}
-      >
+      <Button variant="contained" type="submit">
         Create account
       </Button>
+      <Stack direction="row" spacing={1} justifyContent="center">
+        <Link variant="body1" color="inherit" href="/signin">
+          Click here to back to sign in
+        </Link>
+      </Stack>
     </form>
   );
 };
