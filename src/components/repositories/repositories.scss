@@ -1,3 +1,5 @@
+@import "../../styles/mixins.scss";
+
 // Inspired at https://codepen.io/grardovr/pen/jObWZQq
 
 .loading-repositories {
@@ -20,6 +22,14 @@
     padding: 0;
     border-radius: 0;
     border: 0.1rem solid rgba(0, 0, 0, 0.8);
+
+    @include display-sm {
+      height: 8rem;
+    }
+
+    @include display-md {
+      height: 10rem;
+    }
   }
 
   .repo-list-arrow-right:hover,
@@ -49,16 +59,29 @@
   overflow-x: hidden;
   overflow-y: visible;
   scroll-behavior: smooth;
+
+  @include display-sm {
+    height: 12rem;
+  }
+  @include display-md {
+    height: 14rem;
+  }
 }
 
 .repo-list-container {
   width: 100%;
-  padding-left: 3rem;
-  padding-right: 3rem;
 
   .repo-container {
     width: 100%;
     height: 12rem;
+
+    @include display-sm {
+      height: 8rem;
+    }
+
+    @include display-md {
+      height: 10rem;
+    }
 
     .repo-item:not(:last-child) {
       margin-right: 0.6rem;
@@ -87,6 +110,14 @@
         width: 15rem;
         height: 100%;
         object-fit: cover;
+
+        @include display-sm {
+          width: 11rem;
+        }
+
+        @include display-md {
+          width: 13rem;
+        }
       }
 
       .bookmark {

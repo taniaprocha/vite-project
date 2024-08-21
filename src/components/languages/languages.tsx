@@ -21,7 +21,13 @@ type LanguagesProps = {
 
 export const Languages = ({ selectedLanguages, onSelect }: LanguagesProps) => {
   return (
-    <Stack className="languages" direction="row" spacing={2}>
+    <Stack
+      className="languages"
+      direction="row"
+      rowGap={1}
+      columnGap={2}
+      flexWrap="wrap"
+    >
       {languages.map((language) => {
         return (
           <Chip

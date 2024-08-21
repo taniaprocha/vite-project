@@ -32,7 +32,7 @@ export const SignInScreen = () => {
       onLogin(user);
       navigate("/discovery");
     } catch (error) {
-      console.log("Error while authenticating user", error);
+      console.error("Error while authenticating user", error);
     }
   };
 

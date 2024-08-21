@@ -13,7 +13,9 @@ import { Repositories } from "../../components/repositories/repositories";
 import { useContextApp } from "../../context/app-context";
 import { Bookmarks } from "../../components/bookmarks/bookmarks";
 import { IoIosArrowDown } from "react-icons/io";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContextAuth } from "../../context/auth-context";
 
 export const DiscoveryScreen = () => {
   const {
@@ -26,7 +28,15 @@ export const DiscoveryScreen = () => {
     loadMoreRepositories,
     sortRepositories,
   } = useContextApp();
+  const { user } = useContextAuth();
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [navigate, user]);
 
   return (
     <Container className="container">

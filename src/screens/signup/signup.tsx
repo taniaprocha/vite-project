@@ -28,7 +28,7 @@ export const SignUpScreen = () => {
       );
       navigate("/signin");
     } catch (error) {
-      console.log("Error while creating user", error);
+      console.error("Error while creating user", error);
     }
   };
 

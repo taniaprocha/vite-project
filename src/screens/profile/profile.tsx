@@ -34,11 +34,11 @@ export const ProfileScreen = () => {
             await updateEmail(auth.currentUser, formData.email);
             navigate("/discovery");
           } catch (error) {
-            console.log("Error while updating email", error);
+            console.error("Error while updating email", error);
           }
         }
       } catch (error) {
-        console.log("Error while updating username", error);
+        console.error("Error while updating username", error);
       }
     }
   };
@@ -105,7 +105,7 @@ export const ProfileScreen = () => {
         type="submit"
         disabled={formState.errors && Object.keys(formState.errors).length > 0}
       >
-        Update profile
+        Save
       </Button>
     </form>
   );

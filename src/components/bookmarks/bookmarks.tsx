@@ -34,7 +34,20 @@ export const Bookmarks = ({ bookmarks, onRemoveBookmark }: BookmarksProps) => {
 
   return (
     <Box className="bookmarks-container">
-      <Box className="list" ref={listRef}>
+      <Box
+        className="list"
+        ref={listRef}
+        sx={{
+          paddingLeft:
+            listRef.current?.scrollWidth > listRef.current?.clientWidth
+              ? "2rem"
+              : "0",
+          paddingRight:
+            listRef.current?.scrollWidth > listRef.current?.clientWidth
+              ? "2rem"
+              : "0",
+        }}
+      >
         {bookmarks.map((bookmark) => {
           return (
             <Box key={bookmark.id} className="bookmark">
@@ -52,12 +65,16 @@ export const Bookmarks = ({ bookmarks, onRemoveBookmark }: BookmarksProps) => {
           );
         })}
       </Box>
-      <Button className="bookmarks-arrow-left" onClick={handleSlideLeft}>
-        <IoIosArrowBack size="2rem" color="white" />
-      </Button>
-      <Button className="bookmarks-arrow-right" onClick={handleSlideRight}>
-        <IoIosArrowForward size="2rem" color="white" />
-      </Button>
+      {listRef.current?.scrollWidth > listRef.current?.clientWidth && (
+        <Button className="bookmarks-arrow-left" onClick={handleSlideLeft}>
+          <IoIosArrowBack size="2rem" color="white" />
+        </Button>
+      )}
+      {listRef.current?.scrollWidth > listRef.current?.clientWidth && (
+        <Button className="bookmarks-arrow-right" onClick={handleSlideRight}>
+          <IoIosArrowForward size="2rem" color="white" />
+        </Button>
+      )}
     </Box>
   );
 };

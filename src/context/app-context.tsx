@@ -96,7 +96,6 @@ export function AppContextProvider({ children }: { children?: ReactNode }) {
     if (
       repositoriesData[language].list.length >= repositoriesData[language].total
     ) {
-      console.log("No more repositories to load");
       return;
     }
     const repos = await getRepositories(language, newPage);
