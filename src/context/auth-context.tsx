@@ -18,12 +18,9 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID,
 };
 
-console.log(firebaseConfig);
-
 // Initialize Firebase
 if (!firebase.getApps().length) {
   firebase.initializeApp(firebaseConfig);
-  console.log("Firebase initialized");
 }
 
 export const AuthContext = createContext<AuthContextType>({
